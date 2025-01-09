@@ -48,7 +48,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation ("com.yandex.android:maps.mobile:4.3.1-full")
+    implementation ("com.yandex.android:maps.mobile:4.10.1-lite")
     implementation ("com.google.android.gms:play-services-location:21.3.0")
     implementation ("com.yandex.mapkit.styling:automotivenavigation:4.8.1")
     implementation ("com.yandex.android:maps.mobile:4.8.1-navikit")

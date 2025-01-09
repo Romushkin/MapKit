@@ -9,13 +9,19 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.mapkit.databinding.ActivityMapBinding
+import com.yandex.mapkit.MapKit
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.traffic.TrafficLayer
+
 
 class MapActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMapBinding
     private lateinit var locationManager: LocationManager
+    private lateinit var trafficLayer: TrafficLayer
+    private lateinit var mapKit: MapKit
+    private var isTrafficVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +31,25 @@ class MapActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        mapKit = MapKitFactory.getInstance()
+        trafficLayer = mapKit.createTrafficLayer(binding.mapView.mapWindow)
+
+        binding.fabTraffic.setOnClickListener {
+            toggleTrafficLayer()
+        }
+
         requestLocation()
 
+    }
 
+    private fun toggleTrafficLayer() {
+        if (isTrafficVisible) {
+            trafficLayer.isTrafficVisible = false
+            isTrafficVisible = false
+        } else {
+            trafficLayer.isTrafficVisible = true
+            isTrafficVisible = true
+        }
     }
 
     private fun requestLocation() {
